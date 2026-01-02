@@ -14,6 +14,8 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/farms", require("./routes/farms"));
 app.use("/api/advisory", require("./routes/advisory"));
 app.use("/api/activities", require("./routes/activities"));
+app.use("/api/weather", require("./routes/weather"));
+
 
 
 app.listen(5000, () => console.log("Server running"));

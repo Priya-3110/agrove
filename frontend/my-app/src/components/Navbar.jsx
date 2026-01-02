@@ -48,6 +48,9 @@ export default function Navbar() {
             <button className="btn" onClick={() => navigate("/advisory")}>
               Advisory
             </button>
+             <button className="btn" onClick={() => navigate("/weather")}>
+              Weather Advisory
+            </button>
           </>
         )}
 

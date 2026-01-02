@@ -9,6 +9,7 @@ import Activities from "./pages/Activities";
 import Advisory from "./pages/Advisory";
 import AdminRoute from "./components/AdminRoute";
 import AdminAdvisory from "./pages/AdminAdvisory";
+import WeatherAdvisory from "./pages/WeatherAdvisory";
 
 
 export default function App() {
@@ -43,6 +44,15 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/weather"
+          element={
+            <ProtectedRoute>
+              <WeatherAdvisory />
+            </ProtectedRoute>
+          }
+        />
+
            <Route
   path="/admin/advisory"
   element={
