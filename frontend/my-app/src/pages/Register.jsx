@@ -6,6 +6,7 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("farmer"); // 👈 NEW
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -17,11 +18,18 @@ export default function Register() {
     setLoading(true);
 
     try {
-      await api.post("/auth/register", { name, email, password });
+      await api.post("/auth/register", {
+        name,
+        email,
+        password,
+        role, // 👈 send role
+      });
+
       setSuccess("Registration successful. Please login.");
       setName("");
       setEmail("");
       setPassword("");
+      setRole("farmer");
     } catch (err) {
       setError("User already exists or invalid data");
     } finally {
@@ -32,10 +40,37 @@ export default function Register() {
   return (
     <div className="container">
       <form className="card" onSubmit={handleRegister}>
-        <h2 className="title">Farmer Registration 🌱</h2>
+        <h2 className="title">
+          Register as {role === "admin" ? "Admin 🛠️" : "Farmer 🌱"}
+        </h2>
 
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}
+
+        {/* ROLE SELECTION */}
+        <div style={{ marginBottom: "12px" }}>
+          <label style={{ marginRight: "15px" }}>
+            <input
+              type="radio"
+              name="role"
+              value="farmer"
+              checked={role === "farmer"}
+              onChange={() => setRole("farmer")}
+            />{" "}
+            Farmer
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="admin"
+              checked={role === "admin"}
+              onChange={() => setRole("admin")}
+            />{" "}
+            Admin
+          </label>
+        </div>
 
         <input
           className="input"
