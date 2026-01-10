@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../styles.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   const user = (() => {
     try {
@@ -17,40 +19,51 @@ export default function Navbar() {
     navigate("/login");
   };
 
+  const closeMenu = () => setOpen(false);
+
   return (
     <div className="navbar">
+      {/* Brand */}
       <div className="brand" onClick={() => navigate("/")}>
         🌱 AGROVE
       </div>
 
-      <div style={{ display: "flex", gap: "12px" }}>
-        {/* 🛡️ ADMIN ONLY */}
+      {/* Hamburger (Mobile) */}
+      <div className="hamburger" onClick={() => setOpen(!open)}>
+        ☰
+      </div>
+
+      {/* Links */}
+      <div className={`nav-links ${open ? "open" : ""}`}>
+        {/* 🛡️ ADMIN */}
         {user?.role === "admin" && (
-          <button
+          <NavLink
+            to="/admin/advisory"
             className="btn"
-            onClick={() => navigate("/admin/advisory")}
+            onClick={closeMenu}
           >
             Admin Advisory
-          </button>
+          </NavLink>
         )}
 
-        {/* 👨‍🌾 FARMER ONLY */}
+        {/* 👨‍🌾 FARMER */}
         {user?.role === "farmer" && (
           <>
-            <button className="btn" onClick={() => navigate("/")}>
+            <NavLink to="/" className="btn" onClick={closeMenu}>
               Dashboard
-            </button>
+            </NavLink>
 
-            <button className="btn" onClick={() => navigate("/farms")}>
+            <NavLink to="/farms" className="btn" onClick={closeMenu}>
               Farms
-            </button>
+            </NavLink>
 
-            <button className="btn" onClick={() => navigate("/advisory")}>
+            <NavLink to="/advisory" className="btn" onClick={closeMenu}>
               Advisory
-            </button>
-             <button className="btn" onClick={() => navigate("/weather")}>
+            </NavLink>
+
+            <NavLink to="/weather" className="btn" onClick={closeMenu}>
               Weather Advisory
-            </button>
+            </NavLink>
           </>
         )}
 

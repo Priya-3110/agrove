@@ -10,13 +10,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 32px;
-  background: #166534; /* dark green */
+  padding: 14px 20px;
+  background: #1b5e20;
   color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .brand {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -61,29 +64,50 @@ body {
   border-color: #16a34a;
 }
 
+textarea.input {
+  resize: none;
+}
+
+/* ===== NAV LINKS ===== */
+.nav-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 /* ===== BUTTONS ===== */
 .btn {
-  background: #16a34a;
+  padding: 8px 14px;
+  background: #2e7d32;
   color: white;
-  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
   border: none;
-  border-radius: 10px;
-  font-size: 15px;
   cursor: pointer;
+  font-size: 14px;
   transition: background 0.2s ease;
 }
 
 .btn:hover {
-  background: #15803d;
+  background: #388e3c;
 }
 
-/* Logout button override */
-.btn.logout {
-  background: #b91c1c;
+/* Active NavLink */
+.btn.active {
+  background: #a5d6a7;
+  color: #1b5e20;
+  font-weight: 600;
 }
 
-.btn.logout:hover {
-  background: #991b1b;
+/* Logout button */
+.btn.logout,
+.logout {
+  background: #c62828;
+}
+
+.btn.logout:hover,
+.logout:hover {
+  background: #b71c1c;
 }
 
 /* ===== STATUS MESSAGES ===== */
@@ -105,6 +129,36 @@ body {
   text-align: center;
 }
 
-textarea.input {
-  resize: none;
+/* ===== HAMBURGER ===== */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    background: #1b5e20;
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    padding: 16px 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .btn {
+    width: 90%;
+    text-align: center;
+  }
 }
