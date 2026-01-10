@@ -102,6 +102,9 @@ export default function Register() {
         <button className="btn" disabled={loading}>
           {loading ? "Registering..." : "Register"}
         </button>
+        <p style={{ textAlign: "center", marginTop: "10px" }}>
+          <a href="/login">Login here already have a account</a>
+        </p>
       </form>
     </div>
   );
